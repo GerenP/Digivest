@@ -6,6 +6,9 @@ import path from 'node:path'
 import fs from 'node:fs'
 import { fileURLToPath } from 'node:url'
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 const app=express()
 const PORT=process.env.PORT||8787
 app.use(cors({origin:process.env.CLIENT_ORIGIN||'http://localhost:5173'}))
@@ -31,6 +34,12 @@ function normalizeStock(r){
  return {symbol:r.symbol??r.code??r.ticker??r.secCode??r.stock_code,name:r.name??r.company_name??r.companyName??r.issuer_name??'',price,changePercent:change,volume:Number(r.volume??r.total_volume??NaN),value:Number(r.value??r.turnover??r.trade_value??NaN),raw:r}
 }
 app.get('/api/health',(req,res)=>res.json({ok:true,providerConfigured:configured,aiConfigured:Boolean(process.env.OPENAI_API_KEY),provider:configured?'IDX provider configured':'not configured',serverTime:new Date().toISOString()}))
+
+app.use(express.static(path.join(__dirname, '../dist')));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../dist/index.html'));
+});
 
 app.get('/api/market/screener',async(req,res)=>{
  try{
