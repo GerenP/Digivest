@@ -1,0 +1,32 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+/* Item grid tidak boleh melebar melebihi trek hanya karena konten (mis. baris chip yang bisa di-scroll) */
+@layer base{.grid>*{min-width:0}}
+:root{color-scheme:dark;font-synthesis:none}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:112px;-webkit-text-size-adjust:100%}
+body{margin:0;background:#080b13;color:#eef3ff;font-family:'DM Sans',system-ui,-apple-system,'Segoe UI',sans-serif;-webkit-font-smoothing:antialiased}
+img{max-width:100%;height:auto}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+button:disabled{cursor:not-allowed}
+::selection{background:#7657ff66;color:white}
+.font-display{font-family:'Space Grotesk','DM Sans',system-ui,sans-serif}
+.gradient-text{background:linear-gradient(100deg,#58e1f5 0%,#548dff 45%,#9a5cff 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.glass{background:rgba(16,24,39,.76);backdrop-filter:blur(20px);border:1px solid rgba(157,177,212,.13)}
+.grid-pattern{background-image:linear-gradient(rgba(112,139,189,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(112,139,189,.06) 1px,transparent 1px);background-size:46px 46px;-webkit-mask-image:linear-gradient(#000 0%,transparent 88%);mask-image:linear-gradient(#000 0%,transparent 88%)}
+.section-label{font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:#58dff4;font-weight:700}
+.input-dark{width:100%;border:1px solid rgba(160,180,220,.16);background:#0a111e;border-radius:12px;padding:11px 13px;color:#eef3ff;outline:none}
+.input-dark:focus{border-color:#46d9f2aa;box-shadow:0 0 0 3px #46d9f21a}
+input[type=range]{width:100%;accent-color:#46d9f2;cursor:pointer}
+input[type=checkbox]{accent-color:#46d9f2}
+:focus-visible{outline:2px solid #46d9f2;outline-offset:2px}
+::-webkit-scrollbar{width:8px;height:8px}
+::-webkit-scrollbar-thumb{background:#28354b;border-radius:8px}
+@keyframes drawerIn{from{transform:translateX(-100%)}to{transform:none}}
+@keyframes overlayIn{from{opacity:0}to{opacity:1}}
+.drawer-in{animation:drawerIn .28s cubic-bezier(.2,.8,.2,1)}
+.overlay-in{animation:overlayIn .2s ease-out}
+@media (max-width:640px){input,select,textarea{font-size:16px!important}} /* cegah zoom otomatis iOS */
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
